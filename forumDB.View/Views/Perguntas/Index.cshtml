@@ -1,0 +1,71 @@
+﻿@model IEnumerable<forumDB.Model.Pergunta>
+
+@{
+    ViewData["Title"] = "Perguntas";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Titulo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Texto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Respondida)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Horario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdUsuarioNavigation.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdUsuarioNavigation.Foto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdCursoNavigation.Nome)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                    @Html.DisplayFor(modelItem => item.Texto)
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => item.Titulo)
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => item.Respondida)
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => item.Horario)
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => item.IdUsuarioNavigation.Nome)
+            </td>
+            <td>
+                    <img src="~/Imagem/@item.IdUsuarioNavigation.Foto" style="max-width:80px;width:100%">
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdCursoNavigation.Nome)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Comentários</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

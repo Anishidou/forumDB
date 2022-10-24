@@ -1,0 +1,47 @@
+﻿@model IEnumerable<forumDB.Model.Resposta>
+
+@{
+    ViewData["Title"] = "Respostas";
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Texto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Horario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdUsuarioNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdUsuarioNavigation.Foto)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                    @Html.DisplayFor(modelItem => item.Texto)
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => item.Horario)
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => item.IdUsuarioNavigation.Nome)
+            </td>
+            <td>
+                    <img src="~/Imagem/@item.IdUsuarioNavigation.Foto" style="max-width:80px;width:100%">
+            </td>
+            <td>
+                <a asp-action="EditR" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="DeleteR" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

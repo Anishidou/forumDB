@@ -1,0 +1,114 @@
+﻿@model IEnumerable<forumDB.Model.Pergunta>
+
+@{
+    ViewData["Title"] = "Perguntas";
+}
+
+<script>
+    window.onload = function(){
+        timeago();
+    }
+</script>
+
+<div class="container" style="display:grid; align-items:center; justify-content: center">
+<p>
+    @await Component.InvokeAsync("Create", ViewData["NomeCurso"])
+    @*<a asp-action="Create">Create New</a>*@
+</p>
+
+@*<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Titulo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Texto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Horario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdUsuarioNavigation.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdUsuarioNavigation.Foto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdCursoNavigation.Nome)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>*@
+@foreach (var item in Model) {
+    <div class="card" style="width: 50vw; height:max-content; margin-top: 2vh;">
+            <div class="card-header" style="display:grid; grid-auto-flow: column;">
+            <a asp-action="Details" asp-controller="Usuarios" asp-route-id="@item.IdUsuario" class="linkPerfil">
+                    <img class="rounded-circle" width="45px" src="~/Imagem/@item.IdUsuarioNavigation.Foto">
+                @Html.DisplayFor(modelItem => item.IdUsuarioNavigation.Nome)
+            </a>
+            <div class="dropdown" style="margin-left:auto;">
+                <i class="bi bi-three-dots-vertical btnTresPontos" data-bs-toggle="dropdown" aria-expanded="false"></i>
+                <ul class="dropdown-menu">
+                    <li>
+                        @if (ViewData["usuarioSessaoId"].Equals(item.IdUsuario))
+                        {
+                            <a asp-action="Edit" asp-route-id="@item.Id">Editar</a>
+                        }
+                    </li>
+                    <li>
+                        @if (ViewData["usuarioSessaoId"].Equals(item.IdUsuario) || ViewData["usuarioSessaoAdm"].Equals(true))
+                        {
+                            <a asp-action="Delete" asp-route-id="@item.Id">Deletar</a>
+                        }
+                    </li>
+                    <li>
+                            <a asp-action="CreatePergunta" asp-controller="Denuncias" asp-route-id="@item.Id">Denunciar</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="card-body">
+                <h5 class="card-title"> @Html.DisplayFor(modelItem => item.Titulo) (@Html.DisplayFor(modelItem => item.IdCursoNavigation.Nome))</h5>
+                    <p class="card-text"> @Html.DisplayFor(modelItem => item.Texto) </p>
+        </div>
+        <div class="card-footer">
+                @*@await Component.InvokeAsync("NotasPergunta", item.Id)*@
+                <div id="tempoatras" title="@Html.DisplayFor(modelItem => item.Horario)"></div>
+            <button class="btn btn-secondary" type="button">
+                <a asp-action="Details" asp-route-id="@item.Id" class="linkComentarios"><i class="bi bi-chat-left">@item.Resposta.Count()</i></a>
+            </button>
+        </div>
+    </div>
+
+@*        <tr>
+            <td>
+                    @Html.DisplayFor(modelItem => item.Texto)
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => item.Titulo)
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => item.Horario)
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => item.IdUsuarioNavigation.Nome)
+            </td>
+            <td>
+                    <img src="~/Imagem/@item.IdUsuarioNavigation.Foto" style="max-width:80px;width:100%">
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdCursoNavigation.Nome)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Comentários</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>*@
+}
+</div>

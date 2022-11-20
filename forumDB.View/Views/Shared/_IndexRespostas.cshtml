@@ -1,0 +1,81 @@
+﻿@model IEnumerable<forumDB.Model.Resposta>
+
+@{
+    ViewData["Title"] = "Respostas";
+}
+
+@*<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Texto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Horario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdUsuarioNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdUsuarioNavigation.Foto)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>*@
+@foreach (var item in Model) {
+    <div class="card" style="width: 50vw; height:max-content; margin-top: 2vh;">
+        <div class="card-header" style="display:grid; grid-auto-flow: column;">
+            <a asp-action="Details" asp-controller="Usuarios" asp-route-id="@item.IdUsuario" class="linkPerfil">
+            <img src="~/Imagem/@item.IdUsuarioNavigation.Foto" class="rounded imgPerfil">
+            @Html.DisplayFor(modelItem => item.IdUsuarioNavigation.Nome)
+            </a>
+            <div class="dropdown" style="margin-left:auto;">
+                <i class="bi bi-three-dots-vertical btnTresPontos" data-bs-toggle="dropdown" aria-expanded="false"></i>
+                <ul class="dropdown-menu">
+                    <li>
+                        @if (ViewData["usuarioSessaoId"].Equals(item.IdUsuario))
+                        {
+                            <a asp-action="Edit" asp-route-id="@item.Id">Editar</a>
+                        }
+                    </li>
+                    <li>
+                        @if (ViewData["usuarioSessaoId"].Equals(item.IdUsuario) || ViewData["usuarioSessaoAdm"].Equals(true))
+                        {
+                            <a asp-action="Delete" asp-route-id="@item.Id">Deletar</a>
+                        }
+                    </li>
+                    <li>
+                        <a asp-action="CreateResposta" asp-controller="Denuncias" asp-route-id="@item.Id">Denunciar</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="card-body">
+            <p class="card-text"> @Html.DisplayFor(modelItem => item.Texto) </p>
+        </div>
+        <div class="card-footer">
+            @Html.DisplayFor(modelItem => item.Horario)
+        </div>
+    </div>
+@*        <tr>
+            <td>
+                    @Html.DisplayFor(modelItem => item.Texto)
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => item.Horario)
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => item.IdUsuarioNavigation.Nome)
+            </td>
+            <td>
+                    <img src="~/Imagem/@item.IdUsuarioNavigation.Foto" style="max-width:80px;width:100%">
+            </td>
+            <td>
+                <a asp-action="EditR" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="DeleteR" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>*@
+}
+@*    </tbody>
+</table>*@

@@ -1,0 +1,112 @@
+﻿@model forumDB.Model.Extra.PerguntaReposta
+
+@{
+    ViewData["Title"] = Model.Pergunta.Titulo;
+}
+
+<script>
+    window.onload = function(){
+        $("#txtResposta").val('');
+    }
+</script>
+
+<div>
+    <h4>@Model.Pergunta.Titulo</h4>
+    <hr />
+    <div class="card" style="width: 50vw; height:max-content; margin-top: 2vh;">
+        <div class="card-header" style="display:grid; grid-auto-flow: column;">
+            <a asp-action="Details" asp-controller="Usuarios" asp-route-id="@Model.Pergunta.IdUsuario" class="linkPerfil">
+                <img class="rounded-circle" width="45px" src="~/Imagem/@Model.Pergunta.IdUsuarioNavigation.Foto">
+            @Html.DisplayFor(model => model.Pergunta.IdUsuarioNavigation.Nome)
+            </a>
+        <div class="dropdown" style="margin-left:auto;">
+                <i class="bi bi-three-dots-vertical btnTresPontos" data-bs-toggle="dropdown" aria-expanded="false"></i>
+                <ul class="dropdown-menu">
+                    <li>
+                        @if (ViewData["usuarioSessaoId"].Equals(Model.Pergunta.IdUsuario))
+                        {
+                            <a asp-action="Edit" asp-route-id="@Model.Pergunta.Id">Editar</a>
+                        }
+                    </li>
+                    <li>
+                        @if (ViewData["usuarioSessaoId"].Equals(Model.Pergunta.IdUsuario) || ViewData["usuarioSessaoAdm"].Equals(true))
+                        {
+                            <a asp-action="Delete" asp-route-id="@Model.Pergunta.Id">Deletar</a>
+                        }
+                    </li>
+                    <li>
+                        <a asp-action="CreatePergunta" asp-controller="Denuncias" asp-route-id="@Model.Pergunta.Id">Denunciar</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title"> @Html.DisplayFor(model => model.Pergunta.Titulo) </h5>
+            <p class="card-text"> @Html.DisplayFor(model => model.Pergunta.Texto) </p>
+        </div>
+        <div class="card-footer">
+            @Html.DisplayFor(model => model.Pergunta.IdCursoNavigation.Nome)
+            @Html.DisplayFor(model => model.Pergunta.Horario)
+        </div>
+    </div>
+@*    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Pergunta.Texto)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Pergunta.Texto)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Pergunta.Horario)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Pergunta.Horario)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Pergunta.IdUsuarioNavigation.Nome)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Pergunta.IdUsuarioNavigation.Nome)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Pergunta.IdUsuarioNavigation.Foto)
+        </dt>
+        <dd class="col-sm-10">
+            <img src="~/Imagem/@Model.Pergunta.IdUsuarioNavigation.Foto" style="max-width:80px;width:100%">
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Pergunta.IdCursoNavigation.Nome)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Pergunta.IdCursoNavigation.Nome)
+        </dd>
+    </dl>*@
+</div>
+<div>
+    @*<a asp-action="Edit" asp-route-id="@Model.Pergunta.Id">Edit</a> |*@
+    <a asp-action="Index">Back to List</a>
+</div>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CreateResposta" asp-route-id="@Model.Pergunta.Id">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Respostas.FirstOrDefault().Texto" class="control-label"></label>
+                <textarea asp-for="Respostas.FirstOrDefault().Texto" class="form-control multi-line" id="txtResposta" rows="5"></textarea>
+                <span asp-validation-for="Respostas.FirstOrDefault().Texto" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Postar" class="btn btn-primary" style="margin-top: 1vh;" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }
+@await Html.PartialAsync("_IndexRespostas", Model.Respostas)

@@ -1,0 +1,66 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.olhosenha:hover{
+    cursor: pointer;
+    opacity: 50%
+}
+
+.imgPerfil {
+    min-width: 60px;
+    min-height: 60px;
+    max-width: 60px;
+    max-height: 60px;
+    border: solid 1px;
+}
+
+.imgPerfilHeader {
+    min-width: 35px;
+    min-height: 35px;
+    max-width: 35px;
+    max-height: 35px;
+    border: solid 3px;
+}
+
+.linkPerfil, .linkComentarios, .linkComentarios:hover {
+    all: unset;
+}
+
+.linkPerfil:hover, .btnTresPontos:hover {
+    cursor: pointer;
+}
+
+.menuPerfilOffcanvas{
+    display:none;
+}
+.menuPerfilHeader {
+    display: grid;
+    margin-left: auto;
+    grid-auto-flow:column;
+    margin-right: 1vw;
+}
+
+@media only screen and (max-width: 600px) {
+    .menuPerfilOffcanvas{
+        display:block;
+    }
+    .menuPerfilHeader{
+        display:none;
+    }
+}

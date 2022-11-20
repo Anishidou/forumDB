@@ -1,0 +1,51 @@
+﻿@model forumDB.Model.Usuario
+
+@{
+    Layout = null;
+ }
+
+<title>Fazer Login - forumAEDB</title>
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+
+<div class="container" style="display: flex; justify-content: center; flex-direction: row; width: 100vw; height: 100vh; align-items: center;">
+    <div class="box" style="width: 400px; height: 300px;">
+    <div class="card">
+        <div class="card-header">Fazer Login em Forum AEDB</div>
+        <div class="card-body">
+            <form asp-action="Login">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Email" class="control-label"></label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Senha" class="control-label"></label>
+                    <div class="input-group mb-3">
+                        <input asp-for="Senha" type="password" class="form-control" id="senha"/>
+                        <span class="input-group-text olhosenha" onclick="mostrarSenha()" ><i class="bi bi-eye" id="olhoSenha"></i></span>
+                    </div>
+                    <span asp-validation-for="Senha" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                        <input type="submit" value="Entrar" class="btn btn-primary" style="width: 100%" />
+                </div>
+            </form>
+                <div>
+                    Não tem uma conta?
+                    <a asp-action="Create">Criar Conta</a>
+                </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

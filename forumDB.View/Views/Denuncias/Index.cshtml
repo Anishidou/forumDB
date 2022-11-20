@@ -1,0 +1,45 @@
+﻿@model IEnumerable<forumDB.Model.Denuncia>
+
+@{
+    ViewData["Title"] = "Denuncias";
+}
+
+<h1>Index</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Texto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdRespostaNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdUsuarioNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdPerguntaNavigation)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                    @Html.DisplayFor(modelItem => item.Texto)
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => item.IdResposta)
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => item.IdUsuario)
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => item.IdPergunta)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,80 @@
+﻿@model forumDB.Model.Usuario
+
+@{
+    Layout = null;
+ }
+
+<title>Fazer Cadastro - forumAEDB</title>
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+
+<div class="container" style="display: flex; justify-content: center;">
+    <div class="card" style="width: 50vw; margin-top: 8vh;">
+        <div class="card-header">Fazer Cadastro em Forum AEDB</div>
+        <div class="card-body">
+        <form  asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Matricula" class="control-label"></label>
+                <input asp-for="Matricula" class="form-control" />
+                <span asp-validation-for="Matricula" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Nome" class="control-label"></label>
+                <input asp-for="Nome" class="form-control" />
+                <span asp-validation-for="Nome" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Senha" class="control-label"></label>
+                <div class="input-group mb-3">
+                    <input asp-for="Senha" type="password" class="form-control" id="senha" onchange="compararSenhas()" />
+                    <span class="input-group-text olhosenha" onclick="mostrarSenha()"><i class="bi bi-eye" id="olhoSenha"></i></span>
+                </div>
+                <span asp-validation-for="Senha" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="senha2" class="control-label">Confirmar Senha</label>
+                <input type="password" class="form-control" id="senha2" onchange="compararSenhas()" />
+                <div class="invalid-feedback">
+                    Senhas são diferentes!
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="FotoRaw" class="control-label"></label>
+                <input asp-for="FotoRaw" type="file" class="form-control" />
+                <span asp-validation-for="FotoRaw" class="text-danger"></span>
+            </div>
+                <div class="form-group">
+                <label asp-for="NomeCurso" class="control-label"></label>
+                    <select class="select" style="width: 100%; height: 35px" asp-for="NomeCurso" class="form-control" asp-items="ViewBag.NomeCurso"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Administrador" class="control-label"></label>
+                    <select class="select" style="width: 100%; height: 35px" asp-for="Administrador" class="form-control" asp-items="ViewBag.Administrador"></select>
+                <span asp-validation-for="Administrador" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" style="margin-top: 1vh;"/>
+            </div>
+        </form>
+    <div>
+        Já tem uma conta?
+        <a asp-action="Login">Fazer Login</a>
+    </div>
+</div>
+    </div>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

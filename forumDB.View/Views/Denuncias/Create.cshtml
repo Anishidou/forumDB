@@ -1,0 +1,40 @@
+﻿@model forumDB.Model.Denuncia
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h4>Por que esta denunciando essa postagem?</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CreateDenuncia" asp-controller="Perguntas">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Texto" class="control-label"></label>
+                <textarea asp-for="Texto" class="form-control multi-line" rows="5"></textarea>
+                <span asp-validation-for="Texto" class="text-danger"></span>
+            </div>
+            <div class="form-group">                
+                <input asp-for="IdUsuario" class="form-control" hidden value="@ViewData["usuarioSessaoId"]">
+            </div>
+            <div class="form-group">                
+                <input asp-for="IdPergunta" class="form-control" hidden value="@ViewData["idPergunta"]" />
+            </div>
+            <div class="form-group">
+                <input asp-for="IdResposta" class="form-control" hidden value="@ViewData["idResposta"]" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" asp-controller="Perguntas">Voltar</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

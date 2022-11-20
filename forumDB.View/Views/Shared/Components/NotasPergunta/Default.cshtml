@@ -1,0 +1,49 @@
+﻿@model forumDB.Model.Nota
+
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div>
+    <form asp-action="UpVote" asp-controller="Notas">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <div class="form-check">
+                    <input type="submit" class="btn-check" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                    <label class="btn btn-outline-primary" for="flexRadioDefault1"><i class="bi bi-arrow-up"></i></label><br>
+                </div>
+            </div>
+            <div class="form-group">
+                <input asp-for="IdPergunta" class="form-control" value="@ViewData["idPergunta"]" hidden/>
+            </div>
+            <div class="form-group">
+                <input asp-for="IdResposta" class="form-control" value="@ViewData["idResposta"]" hidden/>
+            </div>
+            @*<div class="form-group">
+                <input type="submit" value="Criar" class="btn btn-primary" style="margin-top: 1vh;" />
+            </div>*@
+    </form>
+    <form asp-action="DownVote" asp-controller="Notas">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <div class="form-check">
+                    <input type="submit" class="btn-check" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                    <label class="btn btn-outline-primary" for="flexRadioDefault2"><i class="bi bi-arrow-down"></i></label><br>
+                </div>
+            </div>
+            <div class="form-group">
+                <input asp-for="IdPergunta" class="form-control" value="@ViewData["idPergunta"]" hidden/>
+            </div>
+            <div class="form-group">
+                <input asp-for="IdResposta" class="form-control" value="@ViewData["idResposta"]" hidden/>
+            </div>
+        @*<div class="form-group">
+                <input type="submit" value="Criar" class="btn btn-primary" style="margin-top: 1vh;" />
+            </div>*@
+    </form>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
